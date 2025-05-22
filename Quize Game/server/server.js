@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
-
+import userRoutes from "./routes/userRoutes"
 dotenv.config();
 
 const app = express();
@@ -10,7 +10,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors());
-
+app.use("/api/users", userRoutes);
 // Root route for test
 app.get("/", (req, res) => {
   res.send("Quiz Game Backend API is running...");
