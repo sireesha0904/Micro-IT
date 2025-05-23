@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import Quiz from "./Quiz";
+import "./App.css";
 
-const App = () => {
+function App() {
   return (
-    <div>
+    <div className="App">
       <h1>Quiz Game</h1>
+      <Quiz />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
