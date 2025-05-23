@@ -14,6 +14,18 @@ router.post("/", async (req, res) => {
         .json({ message: "Missing required fields or not enough options" });
     }
 
+    // Validate that each option has text and isCorrect
+    for (const opt of options) {
+      if (typeof opt.text !== "string" || typeof opt.isCorrect !== "boolean") {
+        return res
+          .status(400)
+          .json({
+            message:
+              "Each option must have text (string) and isCorrect (boolean)",
+          });
+      }
+    }
+
     const question = new Question({ quiz, questionText, options, explanation });
     const savedQuestion = await question.save();
 
@@ -56,11 +68,15 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { questionText, options, explanation } = req.body;
+
+    // Optionally validate options here as well
+
     const updatedQuestion = await Question.findByIdAndUpdate(
       req.params.id,
       { questionText, options, explanation },
-      { new: true }
+      { new: true, runValidators: true }
     );
+
     if (!updatedQuestion) {
       return res.status(404).json({ message: "Question not found" });
     }
