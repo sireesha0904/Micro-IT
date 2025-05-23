@@ -5,6 +5,8 @@ import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
+import questionRoutes from "./routes/questionRoutes.js";
+import resultRoutes from "./routes/resultRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -15,6 +17,8 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/quizzes", quizRoutes);
+app.use("/api/questions", questionRoutes);
+app.use("/api/results", resultRoutes);
 // Root route for test
 app.get("/", (req, res) => {
   res.send("Quiz Game Backend API is running...");

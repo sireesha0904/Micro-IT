@@ -1,11 +1,19 @@
 import mongoose from "mongoose";
 
-const questionSchema = new mongoose.Schema({
-  quiz: { type: mongoose.Schema.Types.ObjectId, ref: "Quiz", required: true },
-  questionText: { type: String, required: true },
-  options: [{ type: String, required: true }], // e.g. ["A", "B", "C", "D"]
-  correctAnswer: { type: String, required: true }, // could be option string or index
+const optionSchema = mongoose.Schema({
+  text: { type: String, required: true },
+  isCorrect: { type: Boolean, required: true },
 });
+
+const questionSchema = mongoose.Schema(
+  {
+    quiz: { type: mongoose.Schema.Types.ObjectId, ref: "Quiz", required: true },
+    questionText: { type: String, required: true },
+    options: [optionSchema],
+    explanation: { type: String }, // Optional explanation for answers
+  },
+  { timestamps: true }
+);
 
 const Question = mongoose.model("Question", questionSchema);
 
