@@ -22,7 +22,7 @@ app.use(cors());
 // Mount routes
 app.use("/api/users", userRoutes);
 app.use("/api/profile", profileRoutes);
-app.use("/api/quizzes", quizRoutes); // ✅ Only one for quizzes
+app.use("/api/quizzes", quizRoutes); 
 app.use("/api/questions", questionRoutes);
 app.use("/api/results", resultRoutes);
 
