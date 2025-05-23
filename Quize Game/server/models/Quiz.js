@@ -1,18 +1,15 @@
 import mongoose from "mongoose";
 
 const quizSchema = new mongoose.Schema({
-  title: { type: String, required: true },
+  title: { type: String, required: [true, "Title is required"] },
   description: { type: String },
-  category: { type: String }, // e.g. "Science", "History"
-  createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+  totalQuestions: {
+    type: Number,
+    required: [true, "Total number of questions is required"],
   },
-  questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
+  category: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
 
 const Quiz = mongoose.model("Quiz", quizSchema);
-
 export default Quiz;

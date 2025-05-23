@@ -1,12 +1,16 @@
+// server.js
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+
+// Route files
 import userRoutes from "./routes/userRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
 import questionRoutes from "./routes/questionRoutes.js";
 import resultRoutes from "./routes/resultRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -14,14 +18,17 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+// Mount routes
 app.use("/api/users", userRoutes);
 app.use("/api/profile", profileRoutes);
-app.use("/api/quizzes", quizRoutes);
+app.use("/api/quizzes", quizRoutes); // ✅ Only one for quizzes
 app.use("/api/questions", questionRoutes);
 app.use("/api/results", resultRoutes);
-// Root route for test
+
+// Test route
 app.get("/", (req, res) => {
-  res.send("Quiz Game Backend API is running...");
+  res.send("✅ Quiz Game Backend API is running...");
 });
 
 // MongoDB connection
