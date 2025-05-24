@@ -1,0 +1,28 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #7a1cac, #2e073f);
+    color: white;
+    text-align: center;
+  }
+  
+  .start-btn {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    background: #ebd3f8;
+    color: #2e073f;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s ease;
+  }
+  
+  .start-btn:hover {
+    background: #ff5f6d;
+    color: white;
+  }
+  
