@@ -1,27 +1,22 @@
 import mongoose from "mongoose";
 
-const optionSchema = mongoose.Schema({
+const optionSchema = new mongoose.Schema({
   text: { type: String, required: true },
-  isCorrect: { type: Boolean, required: true }, // required field
+  isCorrect: { type: Boolean, required: true },
 });
 
-const questionSchema = mongoose.Schema(
+const questionSchema = new mongoose.Schema(
   {
     quiz: { type: mongoose.Schema.Types.ObjectId, ref: "Quiz", required: true },
     questionText: { type: String, required: true },
     options: {
       type: [optionSchema],
       required: true,
-      validate: {
-        validator: (v) => Array.isArray(v) && v.length >= 2,
-        message: "At least two options are required",
-      },
+      validate: [(arr) => arr.length >= 2, "At least 2 options required"],
     },
-    explanation: { type: String }, // Optional explanation
+    explanation: { type: String },
   },
   { timestamps: true }
 );
 
-const Question = mongoose.model("Question", questionSchema);
-
-export default Question;
+export default mongoose.model("Question", questionSchema);

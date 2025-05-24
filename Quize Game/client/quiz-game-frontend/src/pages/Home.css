@@ -1,28 +1,45 @@
 .home-container {
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #7a1cac, #2e073f);
+    align-items: center;
+    background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
     color: white;
     text-align: center;
+    padding: 20px;
+  }
+  
+  .home-container h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  }
+  
+  .home-container p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
   }
   
   .start-btn {
-    padding: 12px 30px;
-    font-size: 1.2rem;
-    background: #ebd3f8;
-    color: #2e073f;
+    background-color: #ff6f61;
     border: none;
-    border-radius: 8px;
+    padding: 15px 40px;
+    font-size: 1.25rem;
+    color: white;
+    border-radius: 50px;
     cursor: pointer;
-    margin-top: 20px;
-    transition: 0.3s ease;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(255, 111, 97, 0.5);
+    transition: all 0.3s ease;
   }
   
   .start-btn:hover {
-    background: #ff5f6d;
-    color: white;
+    background-color: #ff3b2e;
+    box-shadow: 0 8px 20px rgba(255, 59, 46, 0.7);
+    transform: translateY(-3px);
   }
   
