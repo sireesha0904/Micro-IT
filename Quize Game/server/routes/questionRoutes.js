@@ -50,17 +50,14 @@ router.get("/quiz/:quizId", async (req, res) => {
 });
 
 // Get a question by ID
-router.get("/:id", async (req, res) => {
+router.get("/quiz/:quizId", async (req, res) => {
   try {
-    const question = await Question.findById(req.params.id);
-    if (!question) {
-      return res.status(404).json({ message: "Question not found" });
-    }
-    res.json(question);
+    const questions = await Question.find({ quiz: req.params.quizId });
+    res.json(questions);
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Failed to fetch question", error: error.message });
+      .json({ message: "Failed to fetch questions", error: error.message });
   }
 });
 

@@ -1,15 +1,10 @@
+// routes/quizRoutes.js
 import express from "express";
-import Quiz from "../models/Quiz.js";
+import { createQuiz, getAllQuizzes } from "../controllers/quizController.js";
+
 const router = express.Router();
 
-// Get all quizzes
-router.get("/", async (req, res) => {
-  try {
-    const quizzes = await Quiz.find();
-    res.json(quizzes);
-  } catch (err) {
-    res.status(500).json({ message: "Failed to fetch quizzes" });
-  }
-});
+router.post("/", createQuiz);
+router.get("/", getAllQuizzes);
 
 export default router;

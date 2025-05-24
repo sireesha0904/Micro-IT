@@ -22,7 +22,7 @@ app.use(cors());
 // Mount routes
 app.use("/api/users", userRoutes);
 app.use("/api/profile", profileRoutes);
-app.use("/api/quizzes", quizRoutes); 
+app.use("/api/quizzes", quizRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/results", resultRoutes);
 
@@ -31,14 +31,14 @@ app.get("/", (req, res) => {
   res.send("✅ Quiz Game Backend API is running...");
 });
 
+
 // MongoDB connection
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
