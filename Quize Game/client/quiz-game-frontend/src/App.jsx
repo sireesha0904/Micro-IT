@@ -1,13 +1,15 @@
-import React from "react";
-import Quiz from "./Quiz";
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
+// Import Quiz component when ready
 
 function App() {
   return (
-    <div className="App">
-      <h1>Quiz Game</h1>
-      <Quiz />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/auth" element={<Auth />} />
+      {/* Add quiz route after auth */}
+    </Routes>
   );
 }
 
