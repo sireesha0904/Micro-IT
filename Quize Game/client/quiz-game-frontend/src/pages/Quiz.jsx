@@ -1,153 +1,137 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./Quiz.css";
+import { useEffect, useState } from "react";
 
-function Quiz() {
-  const [quizzes, setQuizzes] = useState([]);
-  const [selected, setSelected] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [questions, setQuestions] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [timer, setTimer] = useState(30);
-  const [score, setScore] = useState(0);
-  const [started, setStarted] = useState(false);
+function Quiz({ questions, onRestart }) {
+  const [answers, setAnswers] = useState({}); // { questionId: selectedOptionIndex }
+  const [timeLeft, setTimeLeft] = useState(60); // 1 minute timer
   const [showResult, setShowResult] = useState(false);
+  const [score, setScore] = useState(0);
 
+  // Timer countdown logic
   useEffect(() => {
-    const fetchQuizzes = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/quizzes");
-        setQuizzes(res.data);
-      } catch (error) {
-        console.error("Failed to fetch quizzes:", error);
-      }
-    };
-    fetchQuizzes();
-  }, []);
-
-  useEffect(() => {
-    if (!started || questions.length === 0 || currentIndex >= questions.length)
+    if (timeLeft === 0) {
+      submitQuiz();
       return;
-
-    const interval = setInterval(() => {
-      setTimer((prev) => {
-        if (prev === 1) {
-          handleNext(); // auto-next
-          return 30;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [started, currentIndex, questions]);
-
-  const handleStart = async () => {
-    try {
-      const res = await axios.get(
-        `http://localhost:5000/api/questions?category=${selected}`
-      );
-      setQuestions(res.data);
-      setStarted(true);
-      setTimer(30);
-      setScore(0);
-      setCurrentIndex(0);
-    } catch (error) {
-      alert("Failed to fetch questions.");
     }
+    const timerId = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    return () => clearTimeout(timerId);
+  }, [timeLeft]);
+
+  // When user selects an option
+  const handleSelect = (questionId, optionIndex) => {
+    if (showResult) return; // no change after submission
+    setAnswers({ ...answers, [questionId]: optionIndex });
   };
 
-  const handleAnswer = (option) => {
-    if (option === questions[currentIndex].correctAnswer) {
-      setScore((prev) => prev + 1);
-    }
-    handleNext();
+  // Calculate score and show results
+  const submitQuiz = () => {
+    let calculatedScore = 0;
+    questions.forEach((q) => {
+      const selectedIndex = answers[q._id];
+      if (selectedIndex !== undefined && q.options[selectedIndex]?.isCorrect) {
+        calculatedScore++;
+      }
+    });
+    setScore(calculatedScore);
+    setShowResult(true);
   };
-
-  const handleNext = () => {
-    if (currentIndex + 1 < questions.length) {
-      setCurrentIndex(currentIndex + 1);
-      setTimer(30);
-    } else {
-      setShowResult(true);
-      setStarted(false);
-    }
-  };
-
-  const filteredQuizzes = quizzes.filter((quiz) =>
-    quiz.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
-    <div className="quiz-container">
-      {!started && !showResult && (
-        <>
-          <h1>Select Quiz Category</h1>
+    <div className="quiz-container" style={{ maxWidth: 600, margin: "auto" }}>
+      <h2>Time Remaining: {timeLeft} seconds</h2>
 
-          <div className="quiz-controls">
-            <input
-              type="text"
-              placeholder="Search category..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="quiz-search"
-            />
-
-            <select
-              className="quiz-dropdown"
-              value={selected}
-              onChange={(e) => setSelected(e.target.value)}
-            >
-              <option value="">-- Choose a category --</option>
-              {filteredQuizzes.map((quiz) => (
-                <option key={quiz._id} value={quiz.title}>
-                  {quiz.title}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {selected && (
-            <div className="start-section">
-              <p>
-                🎉 Selected: <strong>{selected}</strong>
-              </p>
-              <button className="start-btn" onClick={handleStart}>
-                Start Quiz
-              </button>
-            </div>
-          )}
-        </>
+      {!showResult && (
+        <button
+          onClick={submitQuiz}
+          disabled={Object.keys(answers).length < questions.length}
+          style={{ padding: "10px 20px", marginBottom: 20, cursor: "pointer" }}
+        >
+          Submit Quiz
+        </button>
       )}
 
-      {started && questions.length > 0 && (
-        <div className="question-card">
-          <div className="timer">⏱ {timer}s</div>
-          <h2>{questions[currentIndex].question}</h2>
-          <div className="options">
-            {questions[currentIndex].options.map((opt, i) => (
-              <button key={i} onClick={() => handleAnswer(opt)}>
-                {opt}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {showResult && (
-        <div className="result-card">
-          <h2>Quiz Completed!</h2>
-          <p>
-            Your Score: {score} / {questions.length}
-          </p>
-          <button
-            onClick={() => {
-              setSelected("");
-              setSearchTerm("");
-              setShowResult(false);
+      {questions.map((q, i) => {
+        const selectedIndex = answers[q._id];
+        return (
+          <div
+            key={q._id}
+            style={{
+              marginBottom: "20px",
+              padding: "15px",
+              border: "1px solid #ccc",
+              borderRadius: "8px",
             }}
           >
-            Play Again
+            <p>
+              <strong>Q{i + 1}:</strong> {q.questionText}
+            </p>
+            <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+              {q.options.map((opt, idx) => {
+                const isSelected = idx === selectedIndex;
+                let optionStyle = {
+                  cursor: showResult ? "default" : "pointer",
+                  padding: "8px 12px",
+                  border: "1px solid #ccc",
+                  marginBottom: "6px",
+                  borderRadius: "5px",
+                };
+                if (showResult) {
+                  if (opt.isCorrect) {
+                    optionStyle.backgroundColor = "#d4edda"; // green
+                    optionStyle.borderColor = "#28a745";
+                    optionStyle.color = "#155724";
+                  } else if (isSelected && !opt.isCorrect) {
+                    optionStyle.backgroundColor = "#f8d7da"; // red
+                    optionStyle.borderColor = "#dc3545";
+                    optionStyle.color = "#721c24";
+                  }
+                } else if (isSelected) {
+                  optionStyle.backgroundColor = "#cce5ff"; // blue highlight
+                }
+                return (
+                  <li
+                    key={idx}
+                    onClick={() => handleSelect(q._id, idx)}
+                    style={optionStyle}
+                  >
+                    {opt.text}
+                  </li>
+                );
+              })}
+            </ul>
+
+            {showResult && (
+              <div
+                style={{
+                  fontStyle: "italic",
+                  color: "#555",
+                  marginTop: "10px",
+                  borderTop: "1px solid #eee",
+                  paddingTop: "10px",
+                }}
+              >
+                Explanation: {q.explanation}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {showResult && (
+        <div style={{ textAlign: "center" }}>
+          <h3>
+            Your Score: {score} / {questions.length}
+          </h3>
+          <button
+            onClick={() => {
+              setAnswers({});
+              setShowResult(false);
+              setTimeLeft(60);
+              setScore(0);
+              onRestart?.();
+            }}
+            style={{ padding: "10px 20px", marginTop: 20, cursor: "pointer" }}
+          >
+            Restart Quiz
           </button>
         </div>
       )}

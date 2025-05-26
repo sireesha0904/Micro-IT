@@ -1,0 +1,15 @@
+/* QuizList.css */
+
+.quizlist-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  select, button {
+    padding: 10px;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  

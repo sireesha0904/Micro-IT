@@ -30,7 +30,7 @@ function Auth() {
     try {
       const res = await axios.post(url, formData);
       localStorage.setItem("token", res.data.token);
-      navigate("/quiz"); // Redirect to quiz or category page
+      navigate("/quizzes"); // Redirect to quiz or category page
     } catch (err) {
       alert(err.response.data.message || "Something went wrong");
     }

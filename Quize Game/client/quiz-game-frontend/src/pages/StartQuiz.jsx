@@ -1,33 +1,48 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./QuizComponent.css";
+import axios from "axios";
+import "./StartQuiz.css"; // Add styles here
 
-const QuizComponent = () => {
+function StartQuiz() {
   const { quizId } = useParams();
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
-
-  const navigate = useNavigate();
+  const [timeLeft, setTimeLeft] = useState(60); // 1-minute timer
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const res = await axios.get(`/api/questions/quiz/${quizId}`);
+    axios
+      .get(`http://localhost:5000/api/questions/quiz/${quizId}`)
+      .then((res) => {
         setQuestions(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchQuestions();
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch questions:", err);
+        setLoading(false);
+      });
   }, [quizId]);
 
-  if (questions.length === 0)
-    return <div className="loading">Loading questions...</div>;
+  useEffect(() => {
+    const timer =
+      timeLeft > 0 &&
+      setInterval(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+
+    if (timeLeft === 0) {
+      setShowResult(true);
+    }
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  if (loading) return <p>Loading...</p>;
+  if (questions.length === 0) return <p>No questions found for this quiz.</p>;
 
   const currentQuestion = questions[currentIndex];
 
@@ -56,6 +71,7 @@ const QuizComponent = () => {
     setScore(0);
     setSelectedOption(null);
     setShowResult(false);
+    setTimeLeft(60);
   };
 
   if (showResult) {
@@ -64,13 +80,10 @@ const QuizComponent = () => {
         <h2>
           Your Score: {score} / {questions.length}
         </h2>
-        <button onClick={handleRestart} className="start-btn">
+        <button className="btn" onClick={handleRestart}>
           Restart Quiz
         </button>
-        <button
-          onClick={() => navigate("/quizzes")}
-          className="start-btn back-btn"
-        >
+        <button className="btn" onClick={() => navigate("/quizzes")}>
           Back to Quizzes
         </button>
       </div>
@@ -79,29 +92,36 @@ const QuizComponent = () => {
 
   return (
     <div className="quiz-container">
-      <h3>{currentQuestion.questionText}</h3>
+      <div className="quiz-header">
+        <h2>Time Left: {timeLeft}s</h2>
+        <p>
+          <strong>Q{currentIndex + 1}:</strong> {currentQuestion.questionText}
+        </p>
+      </div>
+
       <div className="options-list">
-        {currentQuestion.options.map((option, index) => (
+        {currentQuestion.options.map((opt, index) => (
           <button
             key={index}
-            onClick={() => handleOptionSelect(index)}
             className={`option-btn ${
               selectedOption === index ? "selected" : ""
             }`}
+            onClick={() => handleOptionSelect(index)}
           >
-            {option.text}
+            {opt.text}
           </button>
         ))}
       </div>
+
       <button
+        className="btn next-btn"
         onClick={handleNext}
-        className="start-btn"
         disabled={selectedOption === null}
       >
         {currentIndex + 1 === questions.length ? "Finish" : "Next"}
       </button>
     </div>
   );
-};
+}
 
-export default QuizComponent;
+export default StartQuiz;
