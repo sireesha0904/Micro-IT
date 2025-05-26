@@ -1,6 +1,6 @@
 import express from "express";
-import Question from "../models/Question.js";
-
+import Question from "../models/Question.js"; // Adjust the path as necessary
+import mongoose from "mongoose";
 const router = express.Router();
 
 // Create a question for a quiz
@@ -39,12 +39,19 @@ router.post("/", async (req, res) => {
 
 // Get all questions for a quiz
 router.get("/quiz/:quizId", async (req, res) => {
+  const { quizId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(quizId)) {
+    return res.status(400).json({ message: "Invalid quiz ID" });
+  }
+
   try {
-    const quizId = mongoose.Types.ObjectId(req.params.quizId); // <-- add this if needed
     const questions = await Question.find({ quiz: quizId });
     res.json(questions);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch questions", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Failed to fetch questions", error: error.message });
   }
 });
 
