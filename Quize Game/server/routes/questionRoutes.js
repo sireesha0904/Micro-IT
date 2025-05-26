@@ -40,24 +40,11 @@ router.post("/", async (req, res) => {
 // Get all questions for a quiz
 router.get("/quiz/:quizId", async (req, res) => {
   try {
-    const questions = await Question.find({ quiz: req.params.quizId });
+    const quizId = mongoose.Types.ObjectId(req.params.quizId); // <-- add this if needed
+    const questions = await Question.find({ quiz: quizId });
     res.json(questions);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Failed to fetch questions", error: error.message });
-  }
-});
-
-// Get a question by ID
-router.get("/quiz/:quizId", async (req, res) => {
-  try {
-    const questions = await Question.find({ quiz: req.params.quizId });
-    res.json(questions);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Failed to fetch questions", error: error.message });
+    res.status(500).json({ message: "Failed to fetch questions", error: error.message });
   }
 });
 
