@@ -3,8 +3,8 @@
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: url("../assets//background.jpg")
-    no-repeat center center fixed;
+  /* background: url("https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1740&q=80")
+    no-repeat center center fixed; */
   background-size: cover;
   color: #fff;
   min-height: 100vh;

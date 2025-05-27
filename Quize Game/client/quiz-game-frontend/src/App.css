@@ -1,0 +1,133 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto&display=swap');
+
+:root {
+  --primary-color: #7A1CAC;
+  --secondary-color: #EBD3F8;
+  --gradient: linear-gradient(45deg, #a445b2, #d41872, #ff5f6d);
+  --bg-color: #2e073f;
+  --text-color: #ffffff;
+  --highlight-color: #ffc371;
+  --disabled-color: #888;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: var(--highlight-color);
+  margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+  color: var(--highlight-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #ff5f6d;
+}
+
+/* Buttons */
+button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  background: var(--gradient);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff5f6d;
+}
+button:disabled {
+  background: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+/* Input & Select */
+input, select, textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.3s;
+}
+input::placeholder, textarea::placeholder {
+  color: #ccc;
+}
+input:hover, select:hover, textarea:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--highlight-color);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Container Centering Utility */
+.center-container {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 40px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #2e073f, #3a0f50);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }

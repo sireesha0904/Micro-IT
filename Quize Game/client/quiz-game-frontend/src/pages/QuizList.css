@@ -1,15 +1,132 @@
-/* QuizList.css */
-
 .quizlist-container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-color);
+}
+
+.quiz-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 24px;
+  padding: 50px 40px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  color: var(--text-color);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.8s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.quiz-card h2 {
+  font-size: 2.2rem;
+  margin-bottom: 35px;
+  color: var(--highlight-color);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Select Dropdown Wrapper */
+.select-wrapper {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 14px 50px 14px 48px;
+  font-size: 1rem;
+  font-family: inherit;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: white; /* ✅ ensures white text */
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.select-wrapper select option {
+  background: #2E073F; /* or your main background */
+  color: white;
+}
+.select-wrapper select:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.select-wrapper .icon-left,
+.select-wrapper .icon-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+.select-wrapper .icon-left {
+  left: 18px;
+}
+
+.select-wrapper .icon-right {
+  right: 18px;
+}
+
+/* Start Button */
+.start-btn {
+  padding: 14px 36px;
+  background: var(--gradient);
+  border: none;
+  border-radius: 30px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.start-btn:hover:not(:disabled) {
+  transform: scale(1.06);
+  box-shadow: 0 0 18px #ff5f6d;
+}
+
+.start-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
   }
-  
-  select, button {
-    padding: 10px;
-    font-size: 1rem;
-    margin-top: 10px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .quiz-card {
+    padding: 35px 25px;
+  }
+
+  .quiz-card h2 {
+    font-size: 1.7rem;
+  }
+
+  .start-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

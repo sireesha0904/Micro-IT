@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: url("../assets//background.jpg") no-repeat center center fixed;
+  background: url("/quiz-bg.jpg") no-repeat center center fixed;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -107,6 +107,18 @@ body::before {
 .toggle-link:hover {
   color: #ffc371;
 }
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .input-group {
   position: relative;
   display: flex;
@@ -141,18 +153,6 @@ body::before {
 
 .eye-icon:hover {
   color: #ffc371;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Responsive */
