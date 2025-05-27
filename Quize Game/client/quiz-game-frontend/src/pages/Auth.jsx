@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./Auth.css";
 
 function Auth() {
   const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,9 +19,8 @@ function Auth() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const toggleMode = () => {
-    setIsLogin(!isLogin);
-  };
+  const toggleMode = () => setIsLogin(!isLogin);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,9 +31,9 @@ function Auth() {
     try {
       const res = await axios.post(url, formData);
       localStorage.setItem("token", res.data.token);
-      navigate("/quizzes"); // Redirect to quiz or category page
+      navigate("/quizzes");
     } catch (err) {
-      alert(err.response.data.message || "Something went wrong");
+      alert(err.response?.data?.message || "Something went wrong");
     }
   };
 
@@ -42,28 +43,40 @@ function Auth() {
         <h2>{isLogin ? "Login" : "Sign Up"}</h2>
         <form onSubmit={handleSubmit}>
           {!isLogin && (
+            <div className="input-group">
+              <FaUser className="input-icon" />
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+          <div className="input-group">
+            <FaEnvelope className="input-icon" />
             <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
+              type="email"
+              name="email"
+              placeholder="Email Address"
               onChange={handleChange}
               required
             />
-          )}
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-          />
+          </div>
+          <div className="input-group">
+            <FaLock className="input-icon" />
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+            <span className="eye-icon" onClick={togglePasswordVisibility}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
           <button type="submit">{isLogin ? "Login" : "Register"}</button>
         </form>
         <p onClick={toggleMode} className="toggle-link">
