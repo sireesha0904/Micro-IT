@@ -113,15 +113,6 @@ Open your browser at: [http://localhost:5173](http://localhost:5173)
 ### 📌 Questions
 - `GET /api/questions/:quizId` – Fetch quiz questions
 
----
-
-## 📸 Sample UI Preview
-
-| 🏠 Home | 📝 Quiz Page | 🏁 Result Page |
-|--------|--------------|----------------|
-| ![Home](https://via.placeholder.com/300x200) | ![Quiz](https://via.placeholder.com/300x200) | ![Result](https://via.placeholder.com/300x200) |
-
-> Replace these placeholder links with actual screenshots of your project.
 
 ---
 
@@ -129,11 +120,5 @@ Open your browser at: [http://localhost:5173](http://localhost:5173)
 
 **Modi Sireesha**
 
-- 💼 Portfolio: [Visit Here](https://your-portfolio-link.com)
-- 🐙 GitHub: [@your-username](https://github.com/your-username)
-
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
