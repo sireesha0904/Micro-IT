@@ -4,9 +4,10 @@ import mongoose from "mongoose";
 const router = express.Router();
 
 // Create a question for a quiz
-router.post("/", async (req, res) => {
+router.post("/:quizId", async (req, res) => {
   try {
-    const { quiz, questionText, options, explanation } = req.body;
+    const { questionText, options, explanation } = req.body;
+    const quiz = req.params.quizId; // <-- ADD THIS LINE
 
     if (!quiz || !questionText || !options || options.length < 2) {
       return res
@@ -17,12 +18,10 @@ router.post("/", async (req, res) => {
     // Validate that each option has text and isCorrect
     for (const opt of options) {
       if (typeof opt.text !== "string" || typeof opt.isCorrect !== "boolean") {
-        return res
-          .status(400)
-          .json({
-            message:
-              "Each option must have text (string) and isCorrect (boolean)",
-          });
+        return res.status(400).json({
+          message:
+            "Each option must have text (string) and isCorrect (boolean)",
+        });
       }
     }
 
