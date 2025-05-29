@@ -56,6 +56,48 @@ Quiz-Game/
 - 🔐 JWT-based Authentication
 - 🌐 RESTful APIs
 
+## 🗄️ Database Schema (MongoDB Collections)
+
+### 1. Users  
+Stores user data and authentication info.
+
+| Field        | Type      | Description                   |
+|--------------|-----------|-------------------------------|
+| `_id`        | ObjectId  | Unique identifier              |
+| `username`   | String    | User's display name            |
+| `email`      | String    | User's email (unique)          |
+| `password`   | String    | Hashed password                |
+| `role`       | String    | Role of user (e.g. user/admin)|
+| `createdAt`  | Date      | Account creation timestamp     |
+
+---
+
+### 2. Quizzes  
+Contains metadata about each quiz.
+
+| Field        | Type      | Description                   |
+|--------------|-----------|-------------------------------|
+| `_id`        | ObjectId  | Unique quiz identifier         |
+| `title`      | String    | Quiz title                    |
+| `category`   | String    | Quiz category (e.g. Java, HTML)|
+| `description`| String    | Short description of the quiz |
+| `timeLimit`  | Number    | Optional timer in seconds     |
+| `createdBy`  | ObjectId  | Reference to user/admin who created quiz |
+| `createdAt`  | Date      | Creation date                 |
+
+---
+
+### 3. Questions  
+Contains all questions linked to quizzes.
+
+| Field         | Type       | Description                    |
+|---------------|------------|--------------------------------|
+| `_id`         | ObjectId   | Unique question identifier     |
+| `quizId`      | ObjectId   | Reference to the associated quiz|
+| `questionText`| String     | The question being asked       |
+| `options`     | Array      | List of answer options (text + isCorrect flag) |
+| `explanation` | String     | Optional explanation for answer|
+
 ---
 
 ## 📦 Installation & Setup
