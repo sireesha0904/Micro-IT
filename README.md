@@ -1,105 +1,139 @@
-# MERN Quiz Application 🎯
 
-A full-stack Quiz Management web app built with the **MERN** stack — **MongoDB, Express, React, and Node.js**.  
-This platform allows admins to create and manage quizzes and questions, while users can browse and take quizzes with real-time feedback.
+# 🧠 Quiz Game - MERN Stack Application
 
----
-
-## 🌐 Live Demo
-
-> You can host this app using platforms like **Render**, **Vercel**, or **Netlify** and add your live links here.  
-> _Example: [Live App](https://your-quiz-app-demo.vercel.app)_
-
----
-
-## 📑 Table of Contents
-
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Folder Structure](#folder-structure)
-- [Setup & Installation](#setup--installation)
-  - [Backend Setup](#backend-setup)
-  - [Frontend Setup](#frontend-setup)
-- [API Documentation](#api-documentation)
-  - [Quiz APIs](#quiz-apis)
-  - [Question APIs](#question-apis)
-- [Frontend Flow](#frontend-flow)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
----
-
-## 📘 Project Overview
-
-The MERN Quiz App is an interactive platform where:
-
-- Admins can create, update, and delete quizzes and questions.
-- Users can take quizzes, view their performance, and learn from explanations.
-- It supports real-time feedback, explanations for answers, and a user-friendly experience.
+An interactive **Quiz Game** built using the **MERN Stack (MongoDB, Express, React, Node.js)**. This application allows users to register/login, take quizzes on various topics, and view results. It includes dynamic question loading, scoring, role-based features, and a responsive UI.
 
 ---
 
 ## 🚀 Features
 
-✅ Create and manage quizzes  
-✅ Add multiple-choice questions with correct answers and explanations  
-✅ Browse quizzes by topic  
-✅ Take quizzes and get immediate feedback  
-✅ Fully responsive design  
-✅ RESTful API with error handling  
-✅ MongoDB data modeling with Mongoose
+- 🔐 User Authentication with JWT (Login & Signup)
+- ❓ Multiple-choice Questions with instant score
+- 🧠 Score Tracking with result summary
+- 🕒 Optional Timer per quiz (customizable)
+- 📋 Quiz Category Support
+- 📈 Result Feedback at end of each quiz
+- 🎯 Role-based access (user/admin for future extensions)
 
 ---
 
-## 🛠 Tech Stack
+## 📁 Project Structure
 
-| Layer     | Technology                             |
-|-----------|-----------------------------------------|
-| Frontend  | React, React Router, Axios              |
-| Backend   | Node.js, Express.js                     |
-| Database  | MongoDB, Mongoose                       |
-| Tools     | Postman, VS Code, Git, dotenv, nodemon  |
-
----
-
-## 📂 Folder Structure
-
-├── server/ # Backend folder
-│ ├── models/ # Mongoose schemas (Quiz, Question, User)
-│ ├── routes/ # API routes (quizRoutes, questionRoutes, userRoutes)
-│ ├── controllers/ # Route handlers
-│ ├── server.js # Entry point
-│ └── .env # Environment variables
-├── client/quiz-game-frontend/ # Frontend React app
-│ ├── src/
-│ │ ├── pages/ # Home, QuizList, Auth, StartQuiz
-│ │ ├── components/ # Buttons, Headers, etc.
-│ │ ├── services/ # API calls with Axios
-│ │ ├── App.jsx
-│ │ └── index.js
-└── README.md
-
+```
+Quiz-Game/
+│
+├── server/                        # Backend (Node.js + Express)
+│   ├── models/                   # Mongoose schemas (User, Quiz, Question)
+│   ├── routes/                   # Express routes (userRoutes, quizRoutes, questionRoutes)
+│   ├── controllers/              # Route handlers
+│   ├── server.js                 # Backend entry point
+│   └── .env                      # Environment variables
+│
+├── client/quiz-game-frontend/    # Frontend (React + Vite)
+│   ├── src/
+│   │   ├── pages/                # Home, QuizList, Auth, StartQuiz
+│   │   ├── components/           # Reusable UI elements
+│   │   ├── services/             # API services with Axios
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│
+└── README.md                     # Project Documentation
+```
 
 ---
 
-## ⚙️ Setup & Installation
+## 🛠️ Tech Stack
+
+### ✅ Frontend
+- ⚛️ React (Vite)
+- 💡 React Router DOM
+- 🎨 CSS Modules / Custom styling
+- 🔐 JWT Auth with localStorage
+
+### ✅ Backend
+- 🟢 Node.js + Express
+- 🗃️ MongoDB with Mongoose
+- 🔐 JWT-based Authentication
+- 🌐 RESTful APIs
+
+---
+
+## 📦 Installation & Setup
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/mern-quiz-app.git
-cd mern-quiz-app
+git clone https://github.com/your-username/quiz-game.git
+cd quiz-game
+```
 
+### 2. Setup Backend (server)
+
+```bash
+cd server
+npm install
+```
+
+Create a `.env` file in the `server/` folder:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
+
+Then start the backend server:
+
+```bash
+npm run dev
+```
+
+### 3. Setup Frontend (client)
+
+```bash
+cd client/quiz-game-frontend
+npm install
+npm run dev
+```
+
+Open your browser at: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-### ✅ You can now:
+## 🌐 API Endpoints
 
-- Copy this entire content into your `README.md` file.
-- Replace **your email, GitHub link, screenshots, and portfolio** accordingly.
-- Let me know if you'd like a **Postman collection**, or help with **deployment steps** (e.g. Render/Netlify/Vercel).
+### 📌 Users
+- `POST /api/users/register` – Register a new user
+- `POST /api/users/login` – Login and get token
 
-Would you like me to help generate a `Postman Collection` or deploy your app to **Render** or **Vercel** next?
+### 📌 Quizzes
+- `GET /api/quizzes` – Fetch all quizzes
+- `GET /api/quizzes/:id` – Fetch a single quiz
+
+### 📌 Questions
+- `GET /api/questions/:quizId` – Fetch quiz questions
+
+---
+
+## 📸 Sample UI Preview
+
+| 🏠 Home | 📝 Quiz Page | 🏁 Result Page |
+|--------|--------------|----------------|
+| ![Home](https://via.placeholder.com/300x200) | ![Quiz](https://via.placeholder.com/300x200) | ![Result](https://via.placeholder.com/300x200) |
+
+> Replace these placeholder links with actual screenshots of your project.
+
+---
+
+## 🙋‍♀️ Author
+
+**Modi Sireesha**
+
+- 💼 Portfolio: [Visit Here](https://your-portfolio-link.com)
+- 🐙 GitHub: [@your-username](https://github.com/your-username)
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
