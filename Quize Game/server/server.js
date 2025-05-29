@@ -6,10 +6,8 @@ import cors from "cors";
 
 // Route files
 import userRoutes from "./routes/userRoutes.js";
-import profileRoutes from "./routes/profileRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
 import questionRoutes from "./routes/questionRoutes.js";
-import resultRoutes from "./routes/resultRoutes.js";
 
 dotenv.config();
 
@@ -21,10 +19,8 @@ app.use(cors());
 
 // Mount routes
 app.use("/api/users", userRoutes);
-app.use("/api/profile", profileRoutes);
 app.use("/api/quizzes", quizRoutes);
 app.use("/api/questions", questionRoutes);
-app.use("/api/results", resultRoutes);
 
 // Test route
 app.get("/", (req, res) => {
