@@ -10,7 +10,7 @@ export default function Footer() {
       </p>
       <div className="social-links">
         <a
-          href="https://www.linkedin.com/in/your-linkedin-profile"
+          href="https://www.linkedin.com/in/modi-sireesha-63ba47279/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
@@ -18,7 +18,7 @@ export default function Footer() {
           <FaLinkedin />
         </a>
         <a
-          href="https://github.com/your-github-username"
+          href="https://github.com/sireesha0904"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
@@ -26,7 +26,7 @@ export default function Footer() {
           <FaGithub />
         </a>
         <a
-          href="https://x.com/your-x-username"
+          href="https://x.com/_sireeshamodi_"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="X (Twitter)"
