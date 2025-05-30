@@ -38,5 +38,5 @@ Convert between various world currencies using live exchange rates fetched from 
 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/currency-converter-react.git
-cd currency-converter-react
+git clone(https://github.com/sireesha0904/Micro-IT/tree/121f952713421e86c6b5be32880513f12654fc4d/currency-converter)
+cd currency-converter
