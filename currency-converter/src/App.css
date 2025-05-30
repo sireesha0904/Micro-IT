@@ -1,96 +1,60 @@
-/* Reset */
+/* Global styles */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto&display=swap");
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Body Styling with Background Image */
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  /* Sections General */
-  section {
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 2rem;
-    margin: 2rem auto;
-    width: 90%;
-    max-width: 800px;
-  }
-  
-  /* Header */
-  .header {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(to right, #7b2ff7, #f107a3);
-    color: white;
-  }
-  
-  /* About & How It Works Section */
-  .about h2, .how-it-works h2 {
-    color: #7b2ff7;
-  }
-  
-  /* How It Works List */
-  .how-it-works ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .how-it-works li {
-    margin: 10px 0;
-    font-size: 1.1rem;
-  }
-  
-  /* Converter Section */
-  .converter-section {
-    margin: 2rem auto;
-  }
-  
-  /* Footer */
-  .footer {
-    background: #222;
-    color: #eee;
-    text-align: center;
-    padding: 1rem;
-  }
-  
-  .footer a {
-    color: #f107a3;
-    text-decoration: none;
-    margin-left: 8px;
-  }
-  
-  .footer a:hover {
-    text-decoration: underline;
-  }
-  input, select {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  h3 {
-    color: #f107a3;
-  }
-  .social-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-  }
-  
-  .social-links a:hover {
-    transform: scale(1.2);
-  }
-    
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(135deg, #d4a5ff 0%, #7b2ff7 100%);
+  color: #2e073f;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+main {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  min-height: calc(100vh - 140px);
+}
+
+.container {
+  width: 90%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Scrollbar style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f0eaff;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #7b2ff7;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f107a3;
+}
+
+/* Links smooth transition */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:focus,
+a:hover {
+  outline: none;
+  color: #ffc371;
+  transition: color 0.3s ease;
+}

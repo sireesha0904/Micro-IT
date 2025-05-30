@@ -1,25 +1,19 @@
+import React from "react";
+import Header from "./sections/Header";
 import Converter from "./components/Converter";
+import About from "./sections/About";
 import Footer from "./components/Footer";
-import About from "./components/About";
-import HowItWorks from "./components/HowItWorks";
-import './App.css';
-import React from 'react';
-function App() {
+import "./App.css";
+
+export default function App() {
   return (
-    <div className="app-container">
-      <header>
-        <h1>Currency Converter</h1>
-      </header>
-
+    <>
+      <Header />
       <main>
-        <About />
-        <HowItWorks />
         <Converter />
+        <About />
       </main>
-
       <Footer />
-    </div>
+    </>
   );
 }
-
-export default App;

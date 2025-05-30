@@ -1,67 +1,109 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import "./Converter.css";
 
-const Converter = () => {
-  const [amount, setAmount] = useState(1);
-  const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("INR");
-  const [convertedAmount, setConvertedAmount] = useState(null);
+export default function Converter() {
   const [rates, setRates] = useState({});
+  const [currFrom, setCurrFrom] = useState("USD");
+  const [currTo, setCurrTo] = useState("EUR");
+  const [amount, setAmount] = useState(1);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+    fetch("https://api.exchangerate.host/latest")
       .then((res) => res.json())
-      .then((data) => setRates(data.rates));
-  }, [fromCurrency]);
+      .then((data) => {
+        setRates(data.rates);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.error("Error fetching rates:", e);
+        setLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
-    if (rates[toCurrency]) {
-      setConvertedAmount((amount * rates[toCurrency]).toFixed(2));
+    if (rates[currFrom] && rates[currTo]) {
+      const converted = (amount / rates[currFrom]) * rates[currTo];
+      setResult(converted.toFixed(4));
     }
-  }, [amount, fromCurrency, toCurrency, rates]);
+  }, [amount, currFrom, currTo, rates]);
+
+  if (loading)
+    return (
+      <section className="converter container" id="home">
+        <h2>Currency Converter</h2>
+        <p className="loading">Loading rates...</p>
+      </section>
+    );
 
   return (
-    <section className="converter-section">
+    <section className="converter container" id="home">
       <h2>Currency Converter</h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+
+      <div className="input-group">
+        <label htmlFor="amount">Amount:</label>
         <input
           type="number"
+          id="amount"
+          min="0"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          placeholder="Enter amount"
+          step="any"
         />
-
-        <div style={{ display: "flex", gap: "1rem" }}>
-          <select
-            value={fromCurrency}
-            onChange={(e) => setFromCurrency(e.target.value)}
-          >
-            {Object.keys(rates).map((currency) => (
-              <option key={currency} value={currency}>
-                {currency}
-              </option>
-            ))}
-          </select>
-
-          <span style={{ alignSelf: "center" }}>→</span>
-
-          <select
-            value={toCurrency}
-            onChange={(e) => setToCurrency(e.target.value)}
-          >
-            {Object.keys(rates).map((currency) => (
-              <option key={currency} value={currency}>
-                {currency}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <h3>
-          {amount} {fromCurrency} = {convertedAmount} {toCurrency}
-        </h3>
       </div>
+
+      <div className="input-group">
+        <label htmlFor="currFrom">From:</label>
+        <select
+          id="currFrom"
+          value={currFrom}
+          onChange={(e) => setCurrFrom(e.target.value)}
+        >
+          {Object.keys(rates).map((code) => (
+            <option key={code} value={code}>
+              {code}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="currTo">To:</label>
+        <select
+          id="currTo"
+          value={currTo}
+          onChange={(e) => setCurrTo(e.target.value)}
+        >
+          {Object.keys(rates).map((code) => (
+            <option key={code} value={code}>
+              {code}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button
+        className="convert-btn"
+        onClick={() => {
+          if (amount <= 0) {
+            alert("Please enter a valid amount.");
+            return;
+          }
+          // Result auto-updates, so this is mostly for UX.
+        }}
+      >
+        Convert
+      </button>
+
+      {result && (
+        <p className="result">
+          {amount} {currFrom} ={" "}
+          <strong>
+            {result} {currTo}
+          </strong>
+        </p>
+      )}
     </section>
   );
-};
-
-export default Converter;
+}

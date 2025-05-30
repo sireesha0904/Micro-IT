@@ -1,33 +1,37 @@
-import { FaLinkedin, FaGithub } from "react-icons/fa";
+import React from "react";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import "./Footer.css";
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className="footer">
-      <p>
-        © {new Date().getFullYear()} Currency Converter. Built with ❤️ by Modi
-        Sireesha.
-      </p>
-      <div className="social-links">
+      <p>© 2025 Currenex. All rights reserved.</p>
+      <div className="social-icons">
         <a
-          href="https://linkedin.com/in/your-linkedin"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-        >
-          <FaLinkedin size={28} color="#0A66C2" />
-        </a>
-
-        <a
-          href="https://github.com/your-github"
+          href="https://github.com/yourusername"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
         >
-          <FaGithub size={28} color="#171515" />
+          <FaGithub />
+        </a>
+        <a
+          href="https://linkedin.com/in/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <FaLinkedin />
+        </a>
+        <a
+          href="https://twitter.com/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Twitter"
+        >
+          <FaTwitter />
         </a>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
