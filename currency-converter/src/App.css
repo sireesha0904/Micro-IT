@@ -1,0 +1,74 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body Styling with Background Image */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Sections General */
+  section {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 800px;
+  }
+  
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(to right, #7b2ff7, #f107a3);
+    color: white;
+  }
+  
+  /* About & How It Works Section */
+  .about h2, .how-it-works h2 {
+    color: #7b2ff7;
+  }
+  
+  /* How It Works List */
+  .how-it-works ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .how-it-works li {
+    margin: 10px 0;
+    font-size: 1.1rem;
+  }
+  
+  /* Converter Section */
+  .converter-section {
+    margin: 2rem auto;
+  }
+  
+  /* Footer */
+  .footer {
+    background: #222;
+    color: #eee;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .footer a {
+    color: #f107a3;
+    text-decoration: none;
+    margin-left: 8px;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
