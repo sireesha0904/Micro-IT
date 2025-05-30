@@ -45,12 +45,14 @@ Quiz-Game/
 ## 🛠️ Tech Stack
 
 ### ✅ Frontend
+
 - ⚛️ React (Vite)
 - 💡 React Router DOM
 - 🎨 CSS Modules / Custom styling
 - 🔐 JWT Auth with localStorage
 
 ### ✅ Backend
+
 - 🟢 Node.js + Express
 - 🗃️ MongoDB with Mongoose
 - 🔐 JWT-based Authentication
