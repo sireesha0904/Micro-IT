@@ -1,6 +1,97 @@
-body {
+/* Import a clean Google font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* CSS Reset & Global Setup */
+* {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f1f1f1;
-  color: #333;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #f9f9f9;
+  --text-color: #222;
+  --accent-color: #6c63ff;
+  --footer-bg: #f1f1f1;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s, color 0.3s;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  width: 100%;
+}
+
+header,
+footer {
+  padding: 1rem 2rem;
+  text-align: center;
+  background-color: var(--footer-bg);
+  box-shadow: var(--shadow);
+}
+
+header h1 {
+  color: var(--accent-color);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+footer p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Utility Styles */
+button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #574fd6;
+}
+
+input,
+select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    width: 100%;
+  }
 }

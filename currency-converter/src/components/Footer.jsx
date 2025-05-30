@@ -1,39 +1,39 @@
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import React from "react";
+import { FaHeart, FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6";
+import "./Footer.css";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer style={styles.footer}>
-      <p style={{ marginBottom: '0.5rem' }}>Made with ❤️ by [Your Name]</p>
-      <div style={styles.icons}>
-        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
-          <FaGithub size={24} />
+    <footer className="footer">
+      <p>
+        Made with <FaHeart className="heart-icon" /> by Modi Sireesha
+      </p>
+      <div className="social-links">
+        <a
+          href="https://www.linkedin.com/in/your-linkedin-profile"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <FaLinkedin />
         </a>
-        <a href="https://www.linkedin.com/in/yourusername/" target="_blank" rel="noopener noreferrer">
-          <FaLinkedin size={24} />
+        <a
+          href="https://github.com/your-github-username"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+        >
+          <FaGithub />
         </a>
-        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
-          <FaTwitter size={24} />
+        <a
+          href="https://x.com/your-x-username"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X (Twitter)"
+        >
+          <FaXTwitter />
         </a>
       </div>
     </footer>
   );
-};
-
-const styles = {
-  footer: {
-    marginTop: '3rem',
-    textAlign: 'center',
-    padding: '1rem',
-    backgroundColor: '#0077b6',
-    color: 'white',
-    borderRadius: '12px 12px 0 0',
-  },
-  icons: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '1rem',
-    marginTop: '0.5rem',
-  }
-};
-
-export default Footer;
+}
